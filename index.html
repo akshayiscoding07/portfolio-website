@@ -193,6 +193,8 @@
     }
     #outcome-word { display: inline-block; transition: opacity .25s ease; }
     .marquee {
+      width: 100vw;
+      margin-left: calc(50% - 50vw);
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
       overflow: hidden;
@@ -841,6 +843,8 @@
       .cl::before { width: 34px; padding-right: 10px; }
       .code-terminal { font-size: .68rem; padding: 11px 14px 13px; }
       .services, .projects, .process, .toolbox, .experience, .testimonials { padding: 78px 0 84px; }
+      .marquee-group { font-size: .68rem; padding: 10px 0; }
+      .marquee-group span { padding: 0 14px; }
       .service {
         grid-template-columns: 38px 1fr 24px;
         gap: 12px;
