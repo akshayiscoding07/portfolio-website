@@ -299,6 +299,15 @@
       animation: caret-blink 1.1s steps(1) infinite;
     }
     @keyframes caret-blink { 50% { opacity: 0; } }
+    .headline-caret {
+      display: inline-block;
+      width: .085em;
+      height: .88em;
+      margin-left: .05em;
+      background: var(--accent);
+      vertical-align: -.06em;
+      animation: caret-blink 1.06s steps(1) infinite;
+    }
     .capability-strip {
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
@@ -982,7 +991,7 @@
         <div class="intro">
           <p class="hello">Hi, I’m Akshay.</p>
           <p class="availability"><span class="pulse" aria-hidden="true"></span>Open to new opportunities</p>
-          <h1 id="hero-title">I build the <em>whole thing.</em></h1>
+          <h1 id="hero-title">I build websites that <em>win you clients.</em></h1>
           <p class="dek">Full-stack developer turning product ideas into fast, thoughtful experiences — from the first interface to the systems behind it.</p>
           <div class="hero-actions">
             <a class="button" href="#projects">Explore projects</a>
@@ -1509,6 +1518,28 @@
         formStatus.textContent = 'Automatic sending failed — your email app should have opened with the message ready to send.';
       });
     });
+
+    // Typed hero headline
+    (function () {
+      var h1 = document.getElementById('hero-title');
+      if (!h1) { return; }
+      var part1 = 'I build websites that ';
+      var part2 = 'win you clients.';
+      h1.setAttribute('aria-label', part1 + part2);
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
+      h1.innerHTML = '<span aria-hidden="true"><span id="typed-a"></span><em id="typed-b"></em></span><span class="headline-caret" aria-hidden="true"></span>';
+      var a = document.getElementById('typed-a');
+      var b = document.getElementById('typed-b');
+      var i = 0, j = 0;
+      function typeA() {
+        if (i <= part1.length) { a.textContent = part1.slice(0, i++); setTimeout(typeA, 55); }
+        else { setTimeout(typeB, 260); }
+      }
+      function typeB() {
+        if (j <= part2.length) { b.textContent = part2.slice(0, j++); setTimeout(typeB, 70); }
+      }
+      setTimeout(typeA, 1100);
+    })();
   </script>
 </body>
 </html>
