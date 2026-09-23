@@ -302,7 +302,7 @@
       display: inline-block;
       width: .085em;
       height: .88em;
-      margin-left: .05em;
+      margin-left: 0;
       background: var(--accent);
       vertical-align: -.06em;
       animation: caret-blink 1.06s steps(1) infinite;
@@ -1526,7 +1526,7 @@
       var part2 = 'win you clients.';
       h1.setAttribute('aria-label', part1 + part2);
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { return; }
-      h1.innerHTML = '<span aria-hidden="true"><span id="typed-a"></span><em id="typed-b"></em></span><span class="headline-caret" aria-hidden="true"></span>';
+      h1.innerHTML = '<span aria-hidden="true"><span id="typed-a"></span><em><span id="typed-b"></span><span class="headline-caret" aria-hidden="true"></span></em></span>';
       var a = document.getElementById('typed-a');
       var b = document.getElementById('typed-b');
       var i = 0, j = 0;
