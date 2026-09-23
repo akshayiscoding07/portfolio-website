@@ -58,6 +58,7 @@
       margin: 0 auto;
     }
     .topline {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -81,16 +82,57 @@
       background: var(--accent);
       box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
     }
-    nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px 24px; }
-    nav a {
-      text-decoration: none;
-      color: var(--muted);
-      padding: 5px 0;
-      border-bottom: 1px solid transparent;
+    .menu-button {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 50px;
+      height: 50px;
+      flex: 0 0 auto;
+      background: transparent;
+      border: 1px solid var(--line);
+      cursor: pointer;
+      padding: 0;
     }
-    nav a:hover, nav a:focus-visible {
+    .menu-button:hover, .menu-button:focus-visible {
+      border-color: var(--accent);
+      outline: none;
+    }
+    .menu-button span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--ink);
+      transition: transform .3s ease, opacity .3s ease;
+    }
+    .menu-button[aria-expanded="true"] span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .menu-button[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .menu-button[aria-expanded="true"] span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    .site-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      right: 0;
+      z-index: 60;
+      display: grid;
+      min-width: 250px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 8px 8px 0 var(--shadow);
+    }
+    .site-menu[hidden] { display: none; }
+    .site-menu a {
+      padding: 15px 22px;
+      border-bottom: 1px solid var(--line);
+      text-decoration: none;
+      font-weight: 500;
       color: var(--ink);
-      border-color: currentColor;
+    }
+    .site-menu a:last-child { border-bottom: 0; }
+    .site-menu a:hover, .site-menu a:focus-visible {
+      background: var(--panel);
+      color: var(--accent);
       outline: none;
     }
     .hero {
@@ -678,8 +720,7 @@
     }
     @media (max-width: 580px) {
       .shell { width: min(100% - 32px, 680px); }
-      .topline { padding-top: 20px; align-items: flex-start; flex-direction: column; gap: 10px; }
-      nav { width: 100%; justify-content: flex-start; gap: 4px 16px; }
+      .topline { padding-top: 20px; }
       .hero { padding-top: 58px; }
       h1 { font-size: clamp(3.55rem, 21vw, 5.4rem); }
       .dek { margin-top: 28px; }
@@ -726,9 +767,14 @@
 </head>
 <body id="top">
   <div class="shell">
-    <header class="topline" aria-label="Site navigation">
+    <header class="topline">
       <div class="status">Full-stack developer</div>
-      <nav aria-label="Main navigation">
+      <button class="menu-button" id="menu-button" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </button>
+      <nav class="site-menu" id="site-menu" aria-label="Main navigation" hidden>
         <a href="#services">Services</a>
         <a href="#projects">Projects</a>
         <a href="#process">Process</a>
@@ -1014,6 +1060,31 @@
   </div>
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    var menuButton = document.getElementById('menu-button');
+    var siteMenu = document.getElementById('site-menu');
+    function setMenu(open) {
+      menuButton.setAttribute('aria-expanded', open ? 'true' : 'false');
+      menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      siteMenu.hidden = !open;
+    }
+    menuButton.addEventListener('click', function () {
+      setMenu(menuButton.getAttribute('aria-expanded') !== 'true');
+    });
+    siteMenu.addEventListener('click', function (event) {
+      if (event.target.closest('a')) { setMenu(false); }
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+        setMenu(false);
+        menuButton.focus();
+      }
+    });
+    document.addEventListener('click', function (event) {
+      if (menuButton.getAttribute('aria-expanded') === 'true' && !event.target.closest('.topline')) {
+        setMenu(false);
+      }
+    });
 
     var animatedElements = document.querySelectorAll('.reveal, .reveal-group');
     if ('IntersectionObserver' in window) {
