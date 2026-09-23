@@ -853,13 +853,6 @@
       .principle { grid-template-columns: 42px 1fr; }
       .contact { padding: 42px 24px; margin-left: -16px; margin-right: -16px; }
       footer { align-items: flex-end; }
-      .stat { padding: 22px 14px; }
-      .stat-num { font-size: clamp(2.1rem, 11vw, 2.6rem); }
-      .stat-num.is-text { font-size: clamp(1.25rem, 6.5vw, 1.7rem); }
-      .stat-label { font-size: .62rem; }
-      .case-modal { padding: 0; align-items: stretch; }
-      .case-card { max-width: none; max-height: none; border: 0; box-shadow: none; }
-      .footer-cta { padding: 64px 20px; }
     }
     .availability {
       display: inline-flex;
@@ -1067,7 +1060,7 @@
       grid-template-columns: repeat(3, 1fr);
       border-bottom: 1px solid var(--line);
     }
-    .stat { padding: 30px 26px; }
+    .stat { min-width: 0; padding: 30px 26px; }
     .stat + .stat { border-left: 1px solid var(--line); }
     .stat-num {
       display: block;
@@ -1187,6 +1180,18 @@
       margin-top: 38px;
     }
     .footer-cta-actions .button { overflow-wrap: anywhere; }
+    /* ---- Mobile refinements for newer components (must come after their base styles) ---- */
+    @media (max-width: 580px) {
+      .stat-band { grid-template-columns: 1fr 1fr; }
+      .stat { padding: 20px 14px; }
+      .stat:nth-child(3) { grid-column: 1 / -1; border-left: 0; border-top: 1px solid var(--line); }
+      .stat-num { font-size: clamp(2rem, 10vw, 2.6rem); }
+      .stat-num.is-text { font-size: clamp(1.35rem, 6.5vw, 1.7rem); }
+      .stat-label { font-size: .62rem; }
+      .case-modal { padding: 0; align-items: stretch; }
+      .case-card { max-width: none; max-height: none; border: 0; box-shadow: none; }
+      .footer-cta { padding: 60px 20px; }
+    }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after {
