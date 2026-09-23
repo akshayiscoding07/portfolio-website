@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="theme-color" content="#f4f3ef" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#151918" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <title>Akshay — Full-stack developer</title>
+  <script>document.documentElement.classList.add('motion-ready');</script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --paper: #f4f3ef;
+      --ink: #18201e;
+      --muted: #56605d;
+      --line: #c9cec9;
+      --panel: #e8ebe6;
+      --panel-strong: #dce2dc;
+      --accent: #067c72;
+      --accent-ink: #f7fffc;
+      --warm: #e56c42;
+      --shadow: rgba(24, 32, 30, .12);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #151918;
+        --ink: #f1f4ef;
+        --muted: #abb5b0;
+        --line: #39413e;
+        --panel: #202725;
+        --panel-strong: #2a332f;
+        --accent: #45c7b8;
+        --accent-ink: #10201d;
+        --warm: #ff8a60;
+        --shadow: rgba(0, 0, 0, .3);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-width: 0;
+      overflow-x: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "IBM Plex Sans", sans-serif;
+      line-height: 1.55;
+    }
+    a { color: inherit; }
+    button, a, summary { -webkit-tap-highlight-color: transparent; }
+    .shell {
+      width: min(1180px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+    .topline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      padding: 28px 0 18px;
+      border-bottom: 1px solid var(--line);
+      font-size: .86rem;
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .status::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
+    }
+    nav { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px 24px; }
+    nav a {
+      text-decoration: none;
+      color: var(--muted);
+      padding: 5px 0;
+      border-bottom: 1px solid transparent;
+    }
+    nav a:hover, nav a:focus-visible {
+      color: var(--ink);
+      border-color: currentColor;
+      outline: none;
+    }
+    .hero {
+      min-height: 76svh;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(290px, .6fr);
+      gap: clamp(34px, 7vw, 100px);
+      align-items: center;
+      padding: clamp(72px, 10vw, 138px) 0 76px;
+    }
+    .intro { max-width: 790px; }
+    .hello {
+      margin: 0 0 24px;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: -.01em;
+    }
+    h1, h2, h3, p { text-wrap: pretty; }
+    h1, h2, h3 { margin: 0; }
+    h1 {
+      font-family: "DM Serif Display", serif;
+      font-weight: 400;
+      font-size: clamp(4.2rem, 9.8vw, 8.9rem);
+      letter-spacing: -.055em;
+      line-height: .84;
+      text-wrap: balance;
+    }
+    h1 em {
+      display: block;
+      color: var(--warm);
+      font-weight: 400;
+    }
+    .dek {
+      max-width: 620px;
+      margin: 34px 0 0;
+      font-size: clamp(1.08rem, 1.8vw, 1.35rem);
+      color: var(--muted);
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 24px;
+      margin-top: 32px;
+    }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border: 1px solid var(--accent);
+      background: var(--accent);
+      color: var(--accent-ink);
+      text-decoration: none;
+      font: 600 .9rem "IBM Plex Sans", sans-serif;
+      cursor: pointer;
+    }
+    .button:hover, .button:focus-visible { background: transparent; color: var(--accent); outline: none; }
+    .text-link {
+      color: var(--ink);
+      font-weight: 500;
+      text-decoration-color: var(--line);
+      text-underline-offset: 5px;
+    }
+    .text-link:hover, .text-link:focus-visible { color: var(--accent); outline: none; }
+    .system-map {
+      position: relative;
+      aspect-ratio: 1;
+      width: 100%;
+      max-width: 350px;
+      justify-self: end;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--panel);
+      box-shadow: 18px 18px 0 var(--shadow);
+    }
+    .system-map::before, .system-map::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+    }
+    .system-map::before { width: 70%; height: 70%; }
+    .system-map::after { width: 38%; height: 38%; background: var(--paper); }
+    .monogram {
+      position: relative;
+      z-index: 2;
+      font-family: "DM Serif Display", serif;
+      font-size: clamp(4rem, 8vw, 7rem);
+      font-style: italic;
+      color: var(--accent);
+      transform: translateY(-.04em);
+    }
+    .node {
+      position: absolute;
+      z-index: 3;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--muted);
+      font: 500 .68rem "IBM Plex Mono", monospace;
+      box-shadow: 4px 4px 0 var(--shadow);
+    }
+    .node.front { top: 9%; left: 5%; }
+    .node.api { right: -3%; top: 42%; color: var(--accent); }
+    .node.data { left: 7%; bottom: 8%; color: var(--warm); }
+    .orbit {
+      position: absolute;
+      top: 13%;
+      right: 15%;
+      width: 19px;
+      height: 19px;
+      border-radius: 50%;
+      background: var(--warm);
+      z-index: 2;
+    }
+    .capability-strip {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .capability-strip span {
+      min-width: 0;
+      padding: 17px 18px;
+      border-right: 1px solid var(--line);
+      text-align: center;
+      color: var(--muted);
+      font: 500 .76rem "IBM Plex Mono", monospace;
+    }
+    .capability-strip span:last-child { border-right: 0; }
+    section { scroll-margin-top: 24px; }
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font: 500 .72rem "IBM Plex Mono", monospace;
+    }
+    .services {
+      padding: 104px 0 112px;
+    }
+    .service-list {
+      border-top: 1px solid var(--line);
+    }
+    .service {
+      display: grid;
+      grid-template-columns: 70px minmax(200px, .8fr) minmax(0, 1.2fr) 34px;
+      gap: 24px;
+      align-items: center;
+      min-height: 154px;
+      padding: 25px 0;
+      border-bottom: 1px solid var(--line);
+      transition: padding .35s ease, background-color .35s ease;
+    }
+    .service:hover {
+      padding-left: 20px;
+      padding-right: 20px;
+      background: var(--panel);
+    }
+    .service-number {
+      color: var(--warm);
+      font: 500 .72rem "IBM Plex Mono", monospace;
+    }
+    .service h3 {
+      font-family: "DM Serif Display", serif;
+      font-size: clamp(1.8rem, 3.4vw, 3.2rem);
+      font-weight: 400;
+      letter-spacing: -.025em;
+      line-height: 1;
+    }
+    .service p { margin: 0; max-width: 570px; color: var(--muted); }
+    .service-arrow {
+      color: var(--accent);
+      font-size: 1.45rem;
+      transition: transform .35s ease;
+    }
+    .service:hover .service-arrow { transform: translateX(7px); }
+    .projects {
+      padding: 104px 0 112px;
+      border-top: 1px solid var(--line);
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(220px, .8fr) minmax(0, 1.2fr);
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 48px;
+    }
+    .section-head h2,
+    .process h2,
+    .toolbox h2,
+    .about h2,
+    .contact h2 {
+      font-family: "DM Serif Display", serif;
+      font-size: clamp(2.65rem, 5vw, 4.7rem);
+      font-weight: 400;
+      letter-spacing: -.035em;
+      line-height: .98;
+    }
+    .section-head p {
+      margin: 0;
+      max-width: 570px;
+      color: var(--muted);
+      justify-self: end;
+    }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+    .project {
+      position: relative;
+      min-height: 360px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .project:nth-child(1) { grid-column: span 7; }
+    .project:nth-child(2) { grid-column: span 5; background: var(--ink); color: var(--paper); }
+    .project:nth-child(3) { grid-column: 4 / span 9; min-height: 320px; }
+    .project::after {
+      content: attr(data-index);
+      position: absolute;
+      right: -8px;
+      top: -37px;
+      font-family: "DM Serif Display", serif;
+      font-size: 11rem;
+      line-height: 1;
+      color: color-mix(in srgb, currentColor 7%, transparent);
+      pointer-events: none;
+    }
+    .project-top {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .project-kicker {
+      font: 500 .72rem "IBM Plex Mono", monospace;
+      color: var(--accent);
+    }
+    .project:nth-child(2) .project-kicker { color: var(--warm); }
+    .concept-badge {
+      padding: 5px 8px;
+      border: 1px solid currentColor;
+      color: var(--muted);
+      font: 500 .65rem "IBM Plex Mono", monospace;
+    }
+    .project:nth-child(2) .concept-badge { color: color-mix(in srgb, var(--paper) 65%, transparent); }
+    .project-main { position: relative; z-index: 1; max-width: 610px; margin-top: 56px; }
+    .project h3 {
+      font-family: "DM Serif Display", serif;
+      font-weight: 400;
+      font-size: clamp(2rem, 4vw, 3.8rem);
+      line-height: .98;
+      letter-spacing: -.025em;
+    }
+    .project p { margin: 16px 0 0; max-width: 540px; color: var(--muted); }
+    .project:nth-child(2) p { color: color-mix(in srgb, var(--paper) 72%, transparent); }
+    .stack {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 34px;
+    }
+    .stack span {
+      padding: 6px 9px;
+      background: color-mix(in srgb, var(--paper) 75%, transparent);
+      color: var(--muted);
+      font: 500 .69rem "IBM Plex Mono", monospace;
+    }
+    .project:nth-child(2) .stack span { background: color-mix(in srgb, var(--paper) 10%, transparent); color: var(--paper); }
+    .project details { position: relative; z-index: 2; margin-top: 26px; border-top: 1px solid color-mix(in srgb, currentColor 24%, transparent); }
+    .project summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 15px 0 0;
+      font-size: .84rem;
+      font-weight: 600;
+    }
+    .project summary::-webkit-details-marker { display: none; }
+    .project summary::after { content: "+"; color: var(--accent); }
+    .project details[open] summary::after { content: "−"; }
+    .project details p { font-size: .88rem; margin-top: 12px; }
+    .process {
+      padding: 110px 0;
+      border-top: 1px solid var(--line);
+    }
+    .process-intro {
+      display: grid;
+      grid-template-columns: .78fr 1.22fr;
+      gap: 40px;
+      align-items: end;
+      margin-bottom: 58px;
+    }
+    .process-intro p:last-child {
+      justify-self: end;
+      max-width: 560px;
+      margin: 0;
+      color: var(--muted);
+    }
+    .process-track {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+    .process-track::before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 1.15s cubic-bezier(.2,.75,.25,1);
+    }
+    .process.is-visible .process-track::before { width: 100%; }
+    .step {
+      position: relative;
+      min-height: 245px;
+      padding: 34px 25px 24px 0;
+      border-right: 1px solid var(--line);
+    }
+    .step:not(:first-child) { padding-left: 25px; }
+    .step:last-child { border-right: 0; }
+    .step::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      left: 0;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--paper);
+      border: 2px solid var(--accent);
+      transform: scale(0);
+      transition: transform .4s ease;
+    }
+    .process.is-visible .step::before { transform: scale(1); }
+    .process.is-visible .step:nth-child(2)::before { transition-delay: .18s; }
+    .process.is-visible .step:nth-child(3)::before { transition-delay: .36s; }
+    .process.is-visible .step:nth-child(4)::before { transition-delay: .54s; }
+    .step span { color: var(--warm); font: 500 .7rem "IBM Plex Mono", monospace; }
+    .step h3 {
+      margin-top: 48px;
+      font-family: "DM Serif Display", serif;
+      font-size: clamp(1.45rem, 2.4vw, 2.1rem);
+      font-weight: 400;
+    }
+    .step p { margin: 12px 0 0; color: var(--muted); font-size: .91rem; }
+    .toolbox {
+      display: grid;
+      grid-template-columns: .72fr 1.28fr;
+      gap: clamp(46px, 9vw, 140px);
+      padding: 110px 0;
+      border-top: 1px solid var(--line);
+    }
+    .tool-groups { border-top: 1px solid var(--line); }
+    .tool-group {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 26px;
+      padding: 23px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .tool-group h3 {
+      color: var(--accent);
+      font: 500 .72rem "IBM Plex Mono", monospace;
+    }
+    .tool-group p {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1.08rem, 2vw, 1.3rem);
+    }
+    .about {
+      display: grid;
+      grid-template-columns: .72fr 1.28fr;
+      gap: clamp(46px, 9vw, 140px);
+      padding: 110px 0;
+      border-top: 1px solid var(--line);
+    }
+    .about-copy { max-width: 700px; }
+    .about-copy > p {
+      margin: 0;
+      font-size: clamp(1.3rem, 2.5vw, 1.85rem);
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .about-copy strong { color: var(--ink); font-weight: 500; }
+    .principles {
+      margin-top: 48px;
+      border-top: 1px solid var(--line);
+    }
+    .principle {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 18px;
+      padding: 17px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .principle span { color: var(--warm); font: 500 .72rem "IBM Plex Mono", monospace; }
+    .principle p { margin: 0; color: var(--muted); }
+    .contact {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(240px, .7fr);
+      gap: 40px;
+      align-items: end;
+      padding: clamp(52px, 8vw, 92px);
+      margin-bottom: 42px;
+      background: var(--accent);
+      color: var(--accent-ink);
+    }
+    .contact::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      border: 1px solid color-mix(in srgb, var(--accent-ink) 22%, transparent);
+      right: -92px;
+      top: -115px;
+      box-shadow: 0 0 0 48px color-mix(in srgb, var(--accent-ink) 5%, transparent), 0 0 0 96px color-mix(in srgb, var(--accent-ink) 4%, transparent);
+    }
+    .contact h2 { max-width: 670px; font-size: clamp(3.1rem, 7.2vw, 6.8rem); line-height: .88; }
+    .contact-side { position: relative; z-index: 1; }
+    .contact-side p { margin: 0 0 24px; color: color-mix(in srgb, var(--accent-ink) 78%, transparent); }
+    .copy-button {
+      width: 100%;
+      min-height: 50px;
+      border: 1px solid color-mix(in srgb, var(--accent-ink) 65%, transparent);
+      background: transparent;
+      color: var(--accent-ink);
+      font: 600 .9rem "IBM Plex Sans", sans-serif;
+      cursor: pointer;
+    }
+    .copy-button:hover, .copy-button:focus-visible { background: var(--accent-ink); color: var(--accent); outline: none; }
+    .copy-status { min-height: 1.4em; margin: 12px 0 0 !important; font-size: .78rem; }
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: center;
+      padding: 26px 0 34px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: .88rem;
+    }
+    .back-top { text-decoration: none; color: var(--ink); font-weight: 500; }
+    .back-top:hover, .back-top:focus-visible { color: var(--accent); outline: none; }
+    .motion-ready .hero .hello,
+    .motion-ready .hero h1,
+    .motion-ready .hero .dek,
+    .motion-ready .hero-actions,
+    .motion-ready .system-map {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: arrive .75s cubic-bezier(.2,.75,.25,1) forwards;
+    }
+    .motion-ready .hero h1 { animation-delay: .08s; }
+    .motion-ready .hero .dek { animation-delay: .18s; }
+    .motion-ready .hero-actions { animation-delay: .28s; }
+    .motion-ready .system-map { animation: arrive .75s .2s cubic-bezier(.2,.75,.25,1) forwards, drift 5.8s 1s ease-in-out infinite; }
+    .motion-ready .reveal.is-visible { animation: section-reveal .72s cubic-bezier(.2,.75,.25,1) both; }
+    .motion-ready .reveal-group.is-visible > * { animation: section-reveal .62s cubic-bezier(.2,.75,.25,1) both; }
+    .motion-ready .reveal-group.is-visible > *:nth-child(2) { animation-delay: .1s; }
+    .motion-ready .reveal-group.is-visible > *:nth-child(3) { animation-delay: .2s; }
+    .motion-ready .reveal-group.is-visible > *:nth-child(4) { animation-delay: .3s; }
+    .system-map { animation: drift 5.8s ease-in-out infinite; }
+    .orbit { animation: orbit-pulse 2.4s ease-in-out infinite; }
+    .node.front { animation: node-float 3.6s ease-in-out infinite; }
+    .node.api { animation: node-float 3.6s .8s ease-in-out infinite; }
+    .node.data { animation: node-float 3.6s 1.6s ease-in-out infinite; }
+    .project { transition: transform .35s ease, box-shadow .35s ease; }
+    .project:hover { transform: translateY(-7px); box-shadow: 10px 10px 0 var(--shadow); }
+    @keyframes arrive { to { opacity: 1; transform: translateY(0); } }
+    @keyframes section-reveal { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes drift { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-9px) rotate(1deg); } }
+    @keyframes orbit-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(.72); } }
+    @keyframes node-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -6px; } }
+    @media (max-width: 800px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; padding: 78px 0 72px; }
+      h1 { font-size: clamp(4.1rem, 17vw, 7rem); }
+      .system-map { width: min(65vw, 280px); justify-self: start; margin-left: 9vw; }
+      .section-head, .process-intro, .toolbox, .about, .contact { grid-template-columns: 1fr; }
+      .section-head p, .process-intro p:last-child { justify-self: start; }
+      .service { grid-template-columns: 52px minmax(180px, .8fr) minmax(0, 1.2fr) 26px; gap: 18px; }
+      .process-track { grid-template-columns: 1fr 1fr; }
+      .step:nth-child(2) { border-right: 0; }
+      .step:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .toolbox { gap: 40px; }
+      .project:nth-child(1), .project:nth-child(2), .project:nth-child(3) { grid-column: span 12; }
+      .project:nth-child(3) { min-height: 360px; }
+      .contact { align-items: start; }
+      .contact-side { max-width: 520px; }
+    }
+    @media (max-width: 580px) {
+      .shell { width: min(100% - 32px, 680px); }
+      .topline { padding-top: 20px; align-items: flex-start; flex-direction: column; gap: 10px; }
+      nav { width: 100%; justify-content: flex-start; gap: 4px 16px; }
+      .hero { padding-top: 58px; }
+      h1 { font-size: clamp(3.55rem, 21vw, 5.4rem); }
+      .dek { margin-top: 28px; }
+      .system-map { width: min(72vw, 250px); margin-left: 3vw; }
+      .capability-strip { grid-template-columns: 1fr 1fr; }
+      .capability-strip span:nth-child(2) { border-right: 0; }
+      .capability-strip span:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .services, .projects, .process, .toolbox { padding: 78px 0 84px; }
+      .service {
+        grid-template-columns: 38px 1fr 24px;
+        gap: 12px;
+        min-height: 0;
+        padding: 24px 0;
+      }
+      .service p { grid-column: 2 / -1; }
+      .service:hover { padding-left: 0; padding-right: 0; background: transparent; }
+      .process-track { grid-template-columns: 1fr; border-top: 0; }
+      .process-track::before { display: none; }
+      .step, .step:not(:first-child) {
+        min-height: 0;
+        padding: 26px 0 28px 34px;
+        border-right: 0;
+        border-top: 1px solid var(--line);
+        border-bottom: 0;
+      }
+      .step::before { top: 25px; }
+      .step h3 { margin-top: 22px; }
+      .tool-group { grid-template-columns: 1fr; gap: 10px; }
+      .project { padding: 22px; min-height: 370px; }
+      .about { padding: 82px 0; gap: 38px; }
+      .principle { grid-template-columns: 42px 1fr; }
+      .contact { padding: 42px 24px; margin-left: -16px; margin-right: -16px; }
+      footer { align-items: flex-end; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+  <div class="shell">
+    <header class="topline" aria-label="Site navigation">
+      <div class="status">Full-stack developer</div>
+      <nav aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#projects">Projects</a>
+        <a href="#process">Process</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="intro">
+          <p class="hello">Hi, I’m Akshay.</p>
+          <h1 id="hero-title">I build the <em>whole thing.</em></h1>
+          <p class="dek">Full-stack developer turning product ideas into fast, thoughtful experiences — from the first interface to the systems behind it.</p>
+          <div class="hero-actions">
+            <a class="button" href="#projects">Explore projects</a>
+            <a class="text-link" href="#about">How I work ↓</a>
+          </div>
+        </div>
+        <div class="system-map" aria-label="A diagram connecting frontend, API, and data layers">
+          <span class="orbit" aria-hidden="true"></span>
+          <span class="node front">FRONTEND</span>
+          <span class="node api">API</span>
+          <span class="node data">DATA</span>
+          <span class="monogram" aria-hidden="true">A</span>
+        </div>
+      </section>
+
+      <div class="capability-strip" aria-label="Full-stack capabilities">
+        <span>PRODUCT UI</span>
+        <span>APIs</span>
+        <span>DATABASES</span>
+        <span>DEPLOYMENT</span>
+      </div>
+
+      <section class="services reveal" id="services" aria-labelledby="services-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">WHAT I BUILD</p>
+            <h2 id="services-title">One developer,<br />every layer</h2>
+          </div>
+          <p>I bridge product thinking and engineering, so the experience stays coherent from the screen a customer sees to the systems doing the work.</p>
+        </div>
+        <div class="service-list reveal-group">
+          <article class="service">
+            <span class="service-number">01</span>
+            <h3>Product interfaces</h3>
+            <p>Responsive, accessible web experiences with clear interaction patterns and the details that make a product feel considered.</p>
+            <span class="service-arrow" aria-hidden="true">→</span>
+          </article>
+          <article class="service">
+            <span class="service-number">02</span>
+            <h3>Backend systems</h3>
+            <p>APIs, application logic, authentication, and data models built around real product needs rather than unnecessary complexity.</p>
+            <span class="service-arrow" aria-hidden="true">→</span>
+          </article>
+          <article class="service">
+            <span class="service-number">03</span>
+            <h3>Production foundations</h3>
+            <p>Deployment workflows, monitoring, performance, and maintainable architecture that help a product stay dependable as it grows.</p>
+            <span class="service-arrow" aria-hidden="true">→</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="projects reveal" id="projects" aria-labelledby="projects-title">
+        <div class="section-head">
+          <h2 id="projects-title">Project<br />concepts</h2>
+          <p>Three product directions that show how interface design, application logic, and dependable data systems can work as one.</p>
+        </div>
+
+        <div class="project-grid reveal-group">
+          <article class="project" data-index="01">
+            <div class="project-top">
+              <span class="project-kicker">01 / COMMERCE</span>
+              <span class="concept-badge">CONCEPT</span>
+            </div>
+            <div class="project-main">
+              <h3>Commerce control room</h3>
+              <p>A unified workspace for orders, inventory signals, and customer support — built to keep operational decisions close to the data.</p>
+              <div class="stack" aria-label="Suggested technology areas">
+                <span>WEB APP</span><span>API LAYER</span><span>POSTGRES</span>
+              </div>
+              <details>
+                <summary>Open concept brief</summary>
+                <p>One focused view for monitoring fulfilment health, investigating exceptions, and resolving issues without jumping between systems.</p>
+              </details>
+            </div>
+          </article>
+
+          <article class="project" data-index="02">
+            <div class="project-top">
+              <span class="project-kicker">02 / COLLABORATION</span>
+              <span class="concept-badge">CONCEPT</span>
+            </div>
+            <div class="project-main">
+              <h3>Realtime team board</h3>
+              <p>A shared planning surface where updates feel immediate and teams stay aligned without extra meetings.</p>
+              <div class="stack" aria-label="Suggested technology areas">
+                <span>REALTIME</span><span>AUTH</span><span>SYNC</span>
+              </div>
+              <details>
+                <summary>Open concept brief</summary>
+                <p>Presence, optimistic updates, and a clear activity trail turn a familiar board into a responsive multiplayer workspace.</p>
+              </details>
+            </div>
+          </article>
+
+          <article class="project" data-index="03">
+            <div class="project-top">
+              <span class="project-kicker">03 / ANALYTICS</span>
+              <span class="concept-badge">CONCEPT</span>
+            </div>
+            <div class="project-main">
+              <h3>Pocket analytics</h3>
+              <p>A calm mobile dashboard that turns dense product metrics into a few clear signals, useful trends, and timely actions.</p>
+              <div class="stack" aria-label="Suggested technology areas">
+                <span>RESPONSIVE UI</span><span>DATA PIPELINE</span><span>JOBS</span>
+              </div>
+              <details>
+                <summary>Open concept brief</summary>
+                <p>Designed around fast scanning: prioritize the metric that changed, explain why it matters, and keep deeper analysis one tap away.</p>
+              </details>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="process reveal" id="process" aria-labelledby="process-title">
+        <div class="process-intro">
+          <div>
+            <p class="eyebrow">FROM IDEA TO LAUNCH</p>
+            <h2 id="process-title">A practical<br />build rhythm</h2>
+          </div>
+          <p>The best products come from reducing uncertainty early, building in useful slices, and keeping feedback close to the work.</p>
+        </div>
+        <div class="process-track reveal-group">
+          <article class="step">
+            <span>01 / FRAME</span>
+            <h3>Find the real problem</h3>
+            <p>Clarify the audience, the job to be done, and what a meaningful first release needs to prove.</p>
+          </article>
+          <article class="step">
+            <span>02 / SHAPE</span>
+            <h3>Design the system</h3>
+            <p>Map the key flows, choose the right boundaries, and make technical tradeoffs visible.</p>
+          </article>
+          <article class="step">
+            <span>03 / BUILD</span>
+            <h3>Ship useful slices</h3>
+            <p>Develop end to end, test the critical paths, and turn working software into the feedback loop.</p>
+          </article>
+          <article class="step">
+            <span>04 / REFINE</span>
+            <h3>Learn and improve</h3>
+            <p>Measure what matters, remove friction, and strengthen the product where real use reveals it.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="toolbox reveal" id="toolbox" aria-labelledby="toolbox-title">
+        <div>
+          <p class="eyebrow">CAPABILITIES</p>
+          <h2 id="toolbox-title">Across the<br />stack</h2>
+        </div>
+        <div class="tool-groups reveal-group">
+          <article class="tool-group">
+            <h3>INTERFACE</h3>
+            <p>Design systems · responsive UI · accessibility · interaction</p>
+          </article>
+          <article class="tool-group">
+            <h3>APPLICATION</h3>
+            <p>APIs · authentication · business logic · integrations</p>
+          </article>
+          <article class="tool-group">
+            <h3>DATA</h3>
+            <p>Data modeling · relational databases · caching · background jobs</p>
+          </article>
+          <article class="tool-group">
+            <h3>DELIVERY</h3>
+            <p>Testing · deployment · observability · performance</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="about reveal" id="about" aria-labelledby="about-title">
+        <h2 id="about-title">About<br />the work</h2>
+        <div class="about-copy">
+          <p><strong>I’m Akshay, a full-stack developer.</strong> I work across the product stack — shaping interfaces, designing the application logic behind them, and building the data flows that keep everything dependable.</p>
+          <div class="principles" aria-label="Working principles">
+            <div class="principle"><span>01</span><p>Start with the user’s real problem, not the trendiest tool.</p></div>
+            <div class="principle"><span>02</span><p>Keep systems understandable enough to change with confidence.</p></div>
+            <div class="principle"><span>03</span><p>Treat polish, performance, and accessibility as product work.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact reveal" id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">Let’s make something useful.</h2>
+        <div class="contact-side">
+          <p>Have a project, a product question, or an interesting technical problem? Start with a quick hello wherever we’re connected.</p>
+          <button class="copy-button" id="copy-intro" type="button">Copy a quick intro</button>
+          <p class="copy-status" id="copy-status" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>© <span id="year">2026</span> Akshay</span>
+      <a class="back-top" href="#top">Back to top ↑</a>
+    </footer>
+  </div>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    var animatedElements = document.querySelectorAll('.reveal, .reveal-group');
+    if ('IntersectionObserver' in window) {
+      var revealObserver = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -36px 0px' });
+      animatedElements.forEach(function (element) { revealObserver.observe(element); });
+    } else {
+      animatedElements.forEach(function (element) { element.classList.add('is-visible'); });
+    }
+
+    var copyButton = document.getElementById('copy-intro');
+    var copyStatus = document.getElementById('copy-status');
+    var introMessage = 'Hi Akshay — I saw your portfolio and would like to talk about a project.';
+
+    copyButton.addEventListener('click', function () {
+      if (!navigator.clipboard || !navigator.clipboard.writeText) {
+        copyStatus.textContent = 'Copy this: ' + introMessage;
+        return;
+      }
+      navigator.clipboard.writeText(introMessage).then(function () {
+        copyStatus.textContent = 'Copied — ready to paste into your message.';
+        copyButton.textContent = 'Intro copied';
+      }).catch(function () {
+        copyStatus.textContent = 'Copy this: ' + introMessage;
+      });
+    });
+  </script>
+</body>
+</html>
