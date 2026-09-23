@@ -284,6 +284,8 @@
     .section-head h2,
     .process h2,
     .toolbox h2,
+    .experience h2,
+    .testimonials h2,
     .about h2,
     .contact h2 {
       font-family: "DM Serif Display", serif;
@@ -508,6 +510,70 @@
     }
     .principle span { color: var(--warm); font: 500 .72rem "IBM Plex Mono", monospace; }
     .principle p { margin: 0; color: var(--muted); }
+    .experience {
+      padding: 110px 0;
+      border-top: 1px solid var(--line);
+    }
+    .experience-list {
+      margin-top: 52px;
+      border-top: 1px solid var(--line);
+    }
+    .job {
+      display: grid;
+      grid-template-columns: 210px minmax(0, 1fr);
+      gap: 30px;
+      padding: 32px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .job-period {
+      padding-top: 9px;
+      color: var(--warm);
+      font: 500 .72rem "IBM Plex Mono", monospace;
+    }
+    .job h3 {
+      font-family: "DM Serif Display", serif;
+      font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+      font-weight: 400;
+      letter-spacing: -.02em;
+      line-height: 1.05;
+    }
+    .job-role {
+      margin: 10px 0 0;
+      color: var(--accent);
+      font: 500 .72rem "IBM Plex Mono", monospace;
+      letter-spacing: .04em;
+    }
+    .job-desc { margin: 14px 0 0; max-width: 660px; color: var(--muted); }
+    .testimonials {
+      padding: 110px 0;
+      border-top: 1px solid var(--line);
+    }
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 52px;
+    }
+    .quote {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 26px;
+      padding: 30px 28px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+    }
+    .quote blockquote {
+      margin: 0;
+      font-family: "DM Serif Display", serif;
+      font-size: 1.28rem;
+      line-height: 1.4;
+      letter-spacing: -.01em;
+    }
+    .quote figcaption { display: grid; gap: 5px; }
+    .quote .who { font-weight: 600; font-size: .92rem; }
+    .quote .role { color: var(--muted); font: 500 .7rem "IBM Plex Mono", monospace; letter-spacing: .04em; }
     .contact {
       position: relative;
       overflow: hidden;
@@ -570,6 +636,10 @@
     .motion-ready .hero .dek { animation-delay: .18s; }
     .motion-ready .hero-actions { animation-delay: .28s; }
     .motion-ready .system-map { animation: arrive .75s .2s cubic-bezier(.2,.75,.25,1) forwards, drift 5.8s 1s ease-in-out infinite; }
+    .motion-ready .reveal,
+    .motion-ready .reveal-group > * {
+      opacity: 0;
+    }
     .motion-ready .reveal.is-visible { animation: section-reveal .72s cubic-bezier(.2,.75,.25,1) both; }
     .motion-ready .reveal-group.is-visible > * { animation: section-reveal .62s cubic-bezier(.2,.75,.25,1) both; }
     .motion-ready .reveal-group.is-visible > *:nth-child(2) { animation-delay: .1s; }
@@ -602,6 +672,9 @@
       .project:nth-child(3) { min-height: 360px; }
       .contact { align-items: start; }
       .contact-side { max-width: 520px; }
+      .quote-grid { grid-template-columns: 1fr; }
+      .job { grid-template-columns: 1fr; gap: 12px; }
+      .job-period { padding-top: 0; }
     }
     @media (max-width: 580px) {
       .shell { width: min(100% - 32px, 680px); }
@@ -614,7 +687,7 @@
       .capability-strip { grid-template-columns: 1fr 1fr; }
       .capability-strip span:nth-child(2) { border-right: 0; }
       .capability-strip span:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-      .services, .projects, .process, .toolbox { padding: 78px 0 84px; }
+      .services, .projects, .process, .toolbox, .experience, .testimonials { padding: 78px 0 84px; }
       .service {
         grid-template-columns: 38px 1fr 24px;
         gap: 12px;
@@ -659,6 +732,8 @@
         <a href="#services">Services</a>
         <a href="#projects">Projects</a>
         <a href="#process">Process</a>
+        <a href="#experience">Experience</a>
+        <a href="#testimonials">Testimonials</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -841,6 +916,42 @@
         </div>
       </section>
 
+      <section class="experience reveal" id="experience" aria-labelledby="experience-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">BACKGROUND</p>
+            <h2 id="experience-title">Experience<br />so far</h2>
+          </div>
+          <p>A quick look at where I’ve worked and what each role has been about — from shipping interfaces to owning systems end to end.</p>
+        </div>
+        <div class="experience-list reveal-group">
+          <article class="job">
+            <span class="job-period">2023 — PRESENT</span>
+            <div>
+              <h3>Senior Full-Stack Developer</h3>
+              <p class="job-role">COMPANY NAME · CITY / REMOTE</p>
+              <p class="job-desc">Leading product builds end to end — scoping features with stakeholders, shipping web applications, and owning deployment, performance, and reliability.</p>
+            </div>
+          </article>
+          <article class="job">
+            <span class="job-period">2021 — 2023</span>
+            <div>
+              <h3>Full-Stack Developer</h3>
+              <p class="job-role">COMPANY NAME · CITY / REMOTE</p>
+              <p class="job-desc">Built and maintained customer-facing features across the stack — interfaces, APIs, and data models — with an emphasis on clean, testable code.</p>
+            </div>
+          </article>
+          <article class="job">
+            <span class="job-period">2019 — 2021</span>
+            <div>
+              <h3>Frontend Developer</h3>
+              <p class="job-role">COMPANY NAME · CITY / REMOTE</p>
+              <p class="job-desc">Turned designs into responsive, accessible interfaces and learned what makes a UI feel fast, clear, and trustworthy.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section class="about reveal" id="about" aria-labelledby="about-title">
         <h2 id="about-title">About<br />the work</h2>
         <div class="about-copy">
@@ -850,6 +961,39 @@
             <div class="principle"><span>02</span><p>Keep systems understandable enough to change with confidence.</p></div>
             <div class="principle"><span>03</span><p>Treat polish, performance, and accessibility as product work.</p></div>
           </div>
+        </div>
+      </section>
+
+      <section class="testimonials reveal" id="testimonials" aria-labelledby="testimonials-title">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">KIND WORDS</p>
+            <h2 id="testimonials-title">What people<br />say</h2>
+          </div>
+          <p>Notes from people I’ve built things with — on communication, craft, and what it’s like to ship together.</p>
+        </div>
+        <div class="quote-grid reveal-group">
+          <figure class="quote">
+            <blockquote>“Akshay took a rough idea and turned it into a product our customers genuinely enjoy using. Clear communication at every single step.”</blockquote>
+            <figcaption>
+              <span class="who">Client Name</span>
+              <span class="role">FOUNDER · STARTUP</span>
+            </figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>“Rare to find someone who cares about the interface and the infrastructure equally. Everything just worked, on time.”</blockquote>
+            <figcaption>
+              <span class="who">Collaborator Name</span>
+              <span class="role">PRODUCT MANAGER · AGENCY</span>
+            </figcaption>
+          </figure>
+          <figure class="quote">
+            <blockquote>“He asks the questions that save you three rebuilds later. The codebase he left behind is the cleanest we’ve inherited.”</blockquote>
+            <figcaption>
+              <span class="who">Teammate Name</span>
+              <span class="role">ENGINEERING LEAD · COMPANY</span>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
