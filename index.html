@@ -192,27 +192,55 @@
       margin-top: 24px;
     }
     #outcome-word { display: inline-block; transition: opacity .25s ease; }
-    .hero-proof {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 28px;
-      margin: 26px 0 0;
+    .marquee {
+      margin-top: 26px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
     }
-    .hero-proof span { font-size: .92rem; color: var(--muted); }
-    .hero-proof b { color: var(--ink); font-weight: 700; margin-right: 6px; }
-    .trusted {
-      margin: 14px 0 0;
-      font-size: .8rem;
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-scroll 32s linear infinite;
+    }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .marquee-group {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      white-space: nowrap;
+      font: 500 .76rem "IBM Plex Mono", monospace;
+      letter-spacing: .06em;
+      text-transform: uppercase;
       color: var(--muted);
     }
-    .trusted span {
-      display: block;
-      margin-bottom: 6px;
-      font-size: .7rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--ink);
+    .marquee-group > span { padding: 0 18px; }
+    .marquee-group .mq-head { color: var(--ink); font-weight: 600; }
+    .marquee-group .mq-sep { color: var(--accent); padding: 0; }
+    @keyframes marquee-scroll { to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+    }
+    .wa-chat {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 60;
+      width: 56px;
+      height: 56px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #25D366;
+      border: 1px solid var(--ink);
+      border-radius: 50%;
+      box-shadow: 4px 4px 0 var(--ink);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .wa-chat:hover, .wa-chat:focus-visible { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); outline: none; }
+    .wa-chat svg { width: 28px; height: 28px; fill: #fff; }
+    @media (max-width: 640px) {
+      .wa-chat { right: 16px; bottom: 16px; width: 52px; height: 52px; }
     }
     .button {
       display: inline-flex;
@@ -770,8 +798,7 @@
     .motion-ready .hero h1,
     .motion-ready .hero .dek,
     .motion-ready .hero-actions,
-    .motion-ready .hero-proof,
-    .motion-ready .trusted,
+    .motion-ready .marquee,
     .motion-ready .code-window {
       opacity: 0;
       transform: translateY(24px);
@@ -780,8 +807,7 @@
     .motion-ready .hero h1 { animation-delay: .08s; }
     .motion-ready .hero .dek { animation-delay: .18s; }
     .motion-ready .hero-actions { animation-delay: .28s; }
-    .motion-ready .hero-proof { animation-delay: .36s; }
-    .motion-ready .trusted { animation-delay: .42s; }
+    .motion-ready .marquee { animation-delay: .36s; }
     .motion-ready .code-window { animation: arrive .75s .2s cubic-bezier(.2,.75,.25,1) forwards, drift 5.8s 1s ease-in-out infinite; }
     .motion-ready .reveal,
     .motion-ready .reveal-group > * {
@@ -1016,12 +1042,16 @@
             <a class="button button-ghost" href="https://akshayiscoding07.github.io/portfolio-website/Akshay_Kumar_Resume.pdf" download="Akshay_Kumar_Resume.pdf">Download résumé</a>
             <a class="text-link" href="#projects">See projects ↓</a>
           </div>
-          <div class="hero-proof">
-            <span><b>7+</b> years experience</span>
-            <span><b>8</b> projects shipped</span>
-            <span><b>Gov &amp; enterprise</b> clientele</span>
+          <div class="marquee" aria-label="Trusted on projects for: Department of Energy, Abu Dhabi Executive Office, Bank Aljazira, Abu Dhabi Customs. 7 plus years experience, 8 projects shipped, government and enterprise clientele.">
+            <div class="marquee-track" aria-hidden="true">
+              <div class="marquee-group">
+                <span class="mq-head">Trusted on projects for</span><span class="mq-sep">·</span><span>Department of Energy</span><span class="mq-sep">·</span><span>Abu Dhabi Executive Office</span><span class="mq-sep">·</span><span>Bank Aljazira</span><span class="mq-sep">·</span><span>Abu Dhabi Customs</span><span class="mq-sep">·</span><span>7+ years experience</span><span class="mq-sep">·</span><span>8 projects shipped</span><span class="mq-sep">·</span><span>Gov &amp; enterprise clientele</span><span class="mq-sep">·</span>
+              </div>
+              <div class="marquee-group">
+                <span class="mq-head">Trusted on projects for</span><span class="mq-sep">·</span><span>Department of Energy</span><span class="mq-sep">·</span><span>Abu Dhabi Executive Office</span><span class="mq-sep">·</span><span>Bank Aljazira</span><span class="mq-sep">·</span><span>Abu Dhabi Customs</span><span class="mq-sep">·</span><span>7+ years experience</span><span class="mq-sep">·</span><span>8 projects shipped</span><span class="mq-sep">·</span><span>Gov &amp; enterprise clientele</span><span class="mq-sep">·</span>
+              </div>
+            </div>
           </div>
-          <p class="trusted"><span>Trusted on projects for</span>Department of Energy · Abu Dhabi Executive Office · Bank Aljazira · Abu Dhabi Customs</p>
         </div>
         <div class="code-window" aria-label="Code editor showing a TypeScript snippet and a deploy terminal">
           <div class="code-chrome">
@@ -1557,5 +1587,8 @@
     })();
 
   </script>
+  <a class="wa-chat" href="https://wa.me/919573552427?text=Hi%20Akshay%2C%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" aria-label="Chat with Akshay on WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+  </a>
 </body>
 </html>
