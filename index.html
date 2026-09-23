@@ -653,6 +653,38 @@
     }
     .copy-button:hover, .copy-button:focus-visible { background: var(--accent-ink); color: var(--accent); outline: none; }
     .copy-status { min-height: 1.4em; margin: 12px 0 0 !important; font-size: .78rem; }
+    .contact-details {
+      list-style: none;
+      margin: 30px 0 0;
+      padding: 0;
+      border-top: 1px solid color-mix(in srgb, var(--accent-ink) 28%, transparent);
+    }
+    .contact-details li {
+      display: grid;
+      grid-template-columns: 92px minmax(0, 1fr);
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid color-mix(in srgb, var(--accent-ink) 28%, transparent);
+      font-size: .92rem;
+    }
+    .contact-details .label {
+      padding-top: 4px;
+      color: color-mix(in srgb, var(--accent-ink) 68%, transparent);
+      font: 500 .68rem "IBM Plex Mono", monospace;
+      letter-spacing: .07em;
+    }
+    .contact-details a {
+      color: var(--accent-ink);
+      font-weight: 600;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+    }
+    .contact-details a:hover, .contact-details a:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      outline: none;
+    }
+    .contact-details .value { font-weight: 500; }
     footer {
       display: flex;
       justify-content: space-between;
@@ -1055,6 +1087,11 @@
         <h2 id="contact-title">Let’s make something useful.</h2>
         <div class="contact-side">
           <p>Have a project, a product question, or an interesting technical problem? Start with a quick hello wherever we’re connected.</p>
+          <ul class="contact-details" aria-label="Contact details">
+            <li><span class="label">EMAIL</span><a href="mailto:akshay.akshay.kumar05@gmail.com">akshay.akshay.kumar05@gmail.com</a></li>
+            <li><span class="label">PHONE</span><a href="tel:+919573552427">+91 95735 52427</a></li>
+            <li><span class="label">BASED IN</span><span class="value">Hyderabad, India</span></li>
+          </ul>
           <button class="copy-button" id="copy-intro" type="button">Copy a quick intro</button>
           <p class="copy-status" id="copy-status" aria-live="polite"></p>
         </div>
